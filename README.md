@@ -16,7 +16,7 @@ This repo includes:
 * configuration for preprocessing css with tailwind support
 
 ### Installation
-
+```
 /DevConnect
 ├── client/
 │   ├── apis/
@@ -84,6 +84,7 @@ This repo includes:
 ├── tsconfig.json
 ├── README.md
 └── vitest.config.ts
+```
 
 #### **From the Github UI**
 
