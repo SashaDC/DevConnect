@@ -1,18 +1,30 @@
-import { useFetchPosts } from '../hooks/useFetchPosts.ts'
+import { usePosts } from '../hooks/useFetchPosts.ts'
 
-function App() {
-  const { data } = useFruits()
+function Posts() {
+  const { data, isLoading, error } = usePosts()
+
+  if (isLoading) 
+    return <p> Post is loading.. </p>
+  if (error)
+    return  <p> Beep Bop.. something went wrong loading the post.. </p>
 
   return (
     <>
-      <div className="app">
+      <div className="posts">
         <h1 className="text-3xl font-bold underline">
-          Fullstack Boilerplate - with Fruits!
+          Fullstack Boilerplate - Social Media Posts
         </h1>
-        <ul>{data && data.map((fruit) => <li key={fruit}>{fruit}</li>)}</ul>
+        <ul>
+          {data?.map((post) => (
+          <li key={post.id}>
+            <h2 className="font-semibold">{post.title}</h2>
+            <p>{post.content}</p>
+            </li>
+           ))}
+        </ul>
       </div>
     </>
   )
 }
 
-export default App
+export default Posts
