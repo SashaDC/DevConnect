@@ -5,14 +5,20 @@ import {
   MutationFunction,
   QueryKey
 } from '@tanstack/react-query'
-import { getAllPosts} from '../apis/posts.ts'
+import { getAllPosts, getPostById} from '../apis/posts.ts'
 
 export function usePosts() {
   const query = useQuery({ queryKey: ['posts'], queryFn: getAllPosts })
   return query
-    // Extra queries go here e.g. addFruit: useAddFruit()
   
 }
+
+export const usePostById = (id: number) =>
+  useQuery({
+    queryKey: ['posts', id],
+    queryFn: () => getPostById(id),
+    enabled: !!id, // only runs if id is defined and not a 0 or null - it is Truthy
+  })
 
 export function usePostsMutation<TData = unknown, TVariables = unknown>(
   mutationFn: MutationFunction<TData, TVariables>,
@@ -21,7 +27,7 @@ export function usePostsMutation<TData = unknown, TVariables = unknown>(
   const mutation = useMutation({
     mutationFn,
     onSuccess: () => {
-      queryClient.invalidateQueries({ queryKey: ['posts'] as QueryKey })
+      queryClient.invalidateQueries({ queryKey: ['posts'] })
     },
   })
 
