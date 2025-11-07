@@ -1,38 +1,7 @@
 import { fetchWeatherApi } from 'openmeteo';
 import {useEffect, useState} from 'react'
 
-const params = {
-	"latitude": -42,
-	"longitude": 174,
-	"hourly": ["temperature_2m", "precipitation", "precipitation_probability"],
-	"current": ["temperature_2m", "wind_speed_10m", "is_day", "precipitation"],
-	"timezone": "Pacific/Auckland",
-	"forecast_days": 1,
 
-};
-
-export default function WeatherWidget(){
-  const [weatherData, setWeatherData] = useState<any>(null);
-  const url = "https://api.open-meteo.com/v1/forecast";
-
-  useEffect(() => {
-    const fetchWeatherApi = async () => {
-      try {
-        const response = await fetchWeatherApi (url, params)
-
-        const processedData = {
-          current: response.current,
-          hourly: response.hourly,
-        }
-      
-        setWeatherData(processedData);
-      } catch (err) {
-        console.error("Failed to fetch weather", err);
-      }
-    };
-
-    fetchWeather();
-  }, []);
 
 // Process first location. Add a for-loop for multiple locations or weather models
 const response = responses[0];
