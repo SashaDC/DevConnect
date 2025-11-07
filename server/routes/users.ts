@@ -2,25 +2,25 @@ import { Router } from 'express'
 import checkJwt, { JwtRequest } from '../auth0.ts'
 import { StatusCodes } from 'http-status-codes'
 
-import * as db from '../db/fruits.ts'
+import * as db from '../db/posts.ts'
 
 const router = Router()
 
 router.get('/', async (req, res) => {
   try {
-    const fruits = await db.getAllFruits()
+    const posts = await db.getAllPosts()
 
-    res.json({ fruits: fruits.map((fruit) => fruit.name) })
+    res.json({ posts: posts.map((post) => post.name) })
   } catch (error) {
     console.log(error)
-    res.status(500).json({ message: 'Something went wrong' })
+    res.status(500).json({ message: 'Something went wrong with getting all posts' })
   }
 })
 
 router.get('/:id', async (req, res, next) => {
   try {
-    const fruit = await db.getFruitById(req.params.id)
-    res.json(fruit)
+    const post = await db.getPostById(req.params.id)
+    res.json(post)
   } catch (err) {
     next(err)
   }
@@ -34,7 +34,7 @@ router.post('/', checkJwt, async (req: JwtRequest, res, next) => {
 
   try {
     const { owner, name } = req.body
-    const id = await db.addFruit({ owner, name })
+    const id = await db.addPost({ owner, name })
     res
       .setHeader('Location', `${req.baseUrl}/${id}`)
       .sendStatus(StatusCodes.CREATED)
