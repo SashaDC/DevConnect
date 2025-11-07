@@ -27,14 +27,25 @@ router.get('/:id', async (req, res, next) => {
 })
 
 router.post('/', checkJwt, async (req: JwtRequest, res, next) => {
-  if (!req.auth?.sub) {
+  
+// const userId = req.auth?.sub  - to add this once we have users and confirm the name of column
+  if (!req.auth?.sub ) {   // swap with if (!userId)
     res.sendStatus(StatusCodes.UNAUTHORIZED)
     return
   }
 
   try {
-    const { owner, name } = req.body
-    const id = await db.addPost({ owner, name })
+    const { title, content, mediaType, mediaURL } = req.body  // make sure this matches
+    
+    const newPost = {
+      userId: userId, // CRITICAL: Absolutely need this!!!
+      title,
+      content,
+      mediaType,
+      mediaURL,
+      // i don't think we need to have timestamps here, but to test. added as CRITICAL just in caseS
+    }    
+    const id = await db.addPost(newPost)
     res
       .setHeader('Location', `${req.baseUrl}/${id}`)
       .sendStatus(StatusCodes.CREATED)
