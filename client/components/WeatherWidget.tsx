@@ -1,4 +1,5 @@
 import { fetchWeatherApi } from 'openmeteo';
+import {useEffect, useState} from 'react'
 
 const params = {
 	"latitude": -42,
@@ -7,7 +8,7 @@ const params = {
 	"current": ["temperature_2m", "wind_speed_10m", "is_day", "precipitation"],
 	"timezone": "Pacific/Auckland",
 	"forecast_days": 1,
-	"bounding_box": "-90,-180,90,180",
+
 };
 const url = "https://api.open-meteo.com/v1/forecast";
 const responses = await fetchWeatherApi(url, params);
