@@ -34,6 +34,7 @@
     "jsonwebtoken": "^9.0.2",
     "jwks-rsa": "^2.1.5",
     "knex": "^2.5.1",
+    "openmeteo": "^1.2.2",
     "sqlite3": "^5.1.7",
     "superagent": "^10.2.2"
   },
@@ -52,7 +53,6 @@
     "@types/supertest": "^6.0.2",
     "@vitejs/plugin-react": "^4.2.1",
     "autoprefixer": "^10.4.19",
-
     "eslint": "^8.56.0",
     "eslint-plugin-import": "^2.29.1",
     "eslint-plugin-jsx-a11y": "^6.8.0",
@@ -78,13 +78,10 @@
     "vite": "^5.0.0",
     "vitest": "^4.0.7"
   },
-
   "overrides": {
     "vite": "^5.0.0",
     "esbuild": "^0.25.12"
-
   },
-  
   "prettier": {
     "semi": false,
     "singleQuote": true,
