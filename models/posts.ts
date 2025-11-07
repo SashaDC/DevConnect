@@ -1,10 +1,13 @@
-export interface Fruit {
+
+export interface Post {
+
   id: number
-  name: string
-  owner: string
+  userId: number
+  title: string
+  content: string
+  mediaType: string | null
+  mediaURL: string | null
+  created_at: string; 
+  updated_at: string;
 }
 
-export interface FruitData {
-  name: string
-  owner: string
-}
