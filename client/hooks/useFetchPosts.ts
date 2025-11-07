@@ -3,15 +3,15 @@ import {
   useMutation,
   useQueryClient,
   MutationFunction,
+  QueryKey
 } from '@tanstack/react-query'
-import { getPosts} from '../apis/posts.ts'
+import { getAllPosts} from '../apis/posts.ts'
 
-export function useposts() {
-  const query = useQuery({ queryKey: ['posts'], queryFn: getposts })
-  return {
-    ...query,
+export function usePosts() {
+  const query = useQuery({ queryKey: ['posts'], queryFn: getAllPosts })
+  return query
     // Extra queries go here e.g. addFruit: useAddFruit()
-  }
+  
 }
 
 export function usePostsMutation<TData = unknown, TVariables = unknown>(
@@ -21,14 +21,11 @@ export function usePostsMutation<TData = unknown, TVariables = unknown>(
   const mutation = useMutation({
     mutationFn,
     onSuccess: () => {
-      queryClient.invalidateQueries({ queryKey: ['posts'] })
+      queryClient.invalidateQueries({ queryKey: ['posts'] as QueryKey })
     },
   })
 
   return mutation
 }
 
-// Query functions go here e.g. useAddFruit
-/* function useAddFruit() {
-  return usePostsMutation(addFruit)
-} */
+
