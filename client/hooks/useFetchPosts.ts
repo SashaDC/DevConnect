@@ -3,32 +3,35 @@ import {
   useMutation,
   useQueryClient,
   MutationFunction,
+  QueryKey
 } from '@tanstack/react-query'
-import { getFruits } from '../apis/fruits.ts'
+import { getAllPosts, getPostById} from '../apis/posts.ts'
 
-export function useFruits() {
-  const query = useQuery({ queryKey: ['fruits'], queryFn: getFruits })
-  return {
-    ...query,
-    // Extra queries go here e.g. addFruit: useAddFruit()
-  }
+export function usePosts() {
+  const query = useQuery({ queryKey: ['posts'], queryFn: getAllPosts })
+  return query
+  
 }
 
-export function useFruitsMutation<TData = unknown, TVariables = unknown>(
+export const usePostById = (id: number) =>
+  useQuery({
+    queryKey: ['posts', id],
+    queryFn: () => getPostById(id),
+    enabled: !!id, // only runs if id is defined and not a 0 or null - it is Truthy
+  })
+
+export function usePostsMutation<TData = unknown, TVariables = unknown>(
   mutationFn: MutationFunction<TData, TVariables>,
 ) {
   const queryClient = useQueryClient()
   const mutation = useMutation({
     mutationFn,
     onSuccess: () => {
-      queryClient.invalidateQueries({ queryKey: ['fruits'] })
+      queryClient.invalidateQueries({ queryKey: ['posts'] })
     },
   })
 
   return mutation
 }
 
-// Query functions go here e.g. useAddFruit
-/* function useAddFruit() {
-  return useFruitsMutation(addFruit)
-} */
+
