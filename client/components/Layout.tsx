@@ -1,5 +1,5 @@
 import { Outlet } from 'react-router'
-import WeatherWidget from "./WeatherWidget"
+// import WeatherWidget from "./WeatherWidget"
 
 export default function Layout() {
   return (
