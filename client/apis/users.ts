@@ -1,10 +1,13 @@
 import request from 'superagent'
 
-// fetch the user prifile data
+const rootURL = new URL(`/api/v1/users`, document.baseURI)
 
-const rootURL = new URL(`/api/v1`, document.baseURI)
+export async function getAllUsers() {
+  const response = await request.get(rootURL)
+  return response.body
+}
 
-export async function getFruits(): Promise<string[]> {
-  const response = await request.get(`${rootURL}/fruits`)
-  return response.body.fruits as string[]
+export async function getUserById(id: number) {
+  const response = await request.get(`${rootURL}/${id}`)
+  return response.body
 }
