@@ -9,9 +9,7 @@ export default function Layout() {
         {/* (optional header content here) */}
       </header>
 
-      <nav>
-        <NavBar />
-      </nav>
+   
 
       <main className="p-4">
         <Outlet />
