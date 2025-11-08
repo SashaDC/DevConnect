@@ -1,17 +1,17 @@
 import db from './connection.ts'
-import { Fruit, FruitData } from '../../models/fruit.ts'
+import { Post, NewPost } from '../../models/posts'
 
-export async function getAllFruits() {
-  const fruit = await db('fruit').select()
-  return fruit as Fruit[]
+export async function getAllPosts() {
+  const posts  = await db('posts').select()
+  return posts as Post[]
 }
 
-export async function getFruitById(id: number | string) {
-  const fruit = await db('fruit').select().first().where({ id })
-  return fruit as Fruit
+export async function getPostById(id: number | string) {
+  const posts = await db('posts').select().first().where({ id })
+  return posts as Post
 }
 
-export async function addFruit(data: FruitData) {
-  const [id] = await db('fruit').insert(data)
+export async function addPost(data: NewPost) {
+  const [id] = await db('posts').insert(data)
   return id
 }
