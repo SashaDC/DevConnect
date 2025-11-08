@@ -1,6 +1,10 @@
 import { Outlet } from 'react-router'
 // import WeatherWidget from "./WeatherWidget"
+// This layout component holds all basic components
+// The outlet is for the main content such as posts, feed, etc.
 
+// Note:
+// Possibly make header/footer a seperate component to keep it tidy in this one?
 export default function Layout() {
   return (
     <>
