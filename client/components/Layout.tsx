@@ -4,17 +4,22 @@ import { Outlet } from 'react-router'
 export default function Layout() {
   return (
     <>
-      <header>
-        <h1>Fullstack Boilerplate - with Fruits!</h1>
-        {/* header component here */}
-        {/* <WeatherWidget /> */}
+      <header className="p-4 text-center text-xl font-bold">
+        <h1>DevConnect</h1>
+        {/* (optional header content here) */}
       </header>
-      <nav>{/* nav component here */}</nav>
-      <main>
-        {/* this will change based on nav */}
+
+      <nav>
+        <NavBar />
+      </nav>
+
+      <main className="p-4">
         <Outlet />
       </main>
-      <footer>{/* footer component here */}</footer>
+
+      <footer className="p-4 text-center text-xs opacity-60">
+        {/* Footer content here later */}
+      </footer>
     </>
   )
 }
