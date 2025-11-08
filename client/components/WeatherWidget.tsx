@@ -1,19 +1,20 @@
-import { fetchWeatherApi } from 'openmeteo';
+import { useFetchWeather } from "../hooks/useFetchWeather";
 
+export default function WeatherWidget() {
+  const weatherData = useFetchWeather();
 
-export default function WeatherWidget () {
+  if (!weatherData) return <div>Loading weather...</div>;
 
-  const fruits = usefruits()
-  if (!fruits)
-
-  // return loading..
-  return
+  return (
     <div>
-      <h1></h1>
-      <h2></h2>
+      <h2>Current: {weatherData.current.temperature_2m}°C</h2>
       <ul>
-
+        {weatherData.hourly.time.map((t, i) => (
+          <li key={i}>
+            {t.toLocaleTimeString()}: {weatherData.hourly.temperature_2m[i]}°C
+          </li>
+        ))}
       </ul>
     </div>
+  );
 }
-

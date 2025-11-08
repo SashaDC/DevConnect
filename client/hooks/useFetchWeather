@@ -1,7 +1,9 @@
 import { useEffect, useState } from "react";
 import { fetchWeatherApi } from "openmeteo";
-import { WeatherData } from "../models/weather";
+import { WeatherData } from "../../models/weather";
 
+// /home/ravidass/devacademy/bootcamp/november/DevConnect/client/hooks/useFetchWeather
+// /home/ravidass/devacademy/bootcamp/november/DevConnect/models/weather.ts
 const params = {
   latitude: -42,
   longitude: 174,
@@ -11,8 +13,8 @@ const params = {
   forecast_days: 1,
 };
 
-export function useFetchWeather(): WeatherData | null {
-  const [weatherData, setWeatherData] = useState<WeatherData | null>(null);
+export function useFetchWeather() {
+  const [weatherData, setWeatherData] = useState(null);
 
   useEffect(() => {
     const fetchWeather = async () => {
