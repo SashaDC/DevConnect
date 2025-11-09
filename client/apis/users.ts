@@ -5,5 +5,10 @@ const rootURL = new URL(`/api/v1/users`, document.baseURI)
 // update certain piece of user info
 
 export async function updateUserInfo(updateInfo: {field: string, value: string}, authId: string): Promise<void> {
-  await request.patch(`${rootURL}/`).send({authId: authId, updateInfo: updateInfo})
+  try {
+    await request.patch(`${rootURL}/`).send({authId: authId, updateInfo: updateInfo})
+  } catch (error) {
+    console.log("Unable to update")
+  }
+
 }
