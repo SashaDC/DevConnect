@@ -1,18 +1,18 @@
-import { useFruits } from '../hooks/useFruits.ts'
+import { usePosts } from '../hooks/useFetchPosts'
+import Post from './Post'
 
-function App() {
-  const { data } = useFruits()
+export default function HomeFeed() {
+  const { data: posts, isLoading, error } = usePosts()
+
+  if (isLoading) return <p>Loading posts...</p>
+  if (error)
+    return <p className="text-red-500">Something went wrong loading posts.</p>
 
   return (
-    <>
-      <div className="app">
-        <h1 className="text-3xl font-bold underline">
-          Fullstack Boilerplate - with Fruits!
-        </h1>
-        <ul>{data && data.map((fruit) => <li key={fruit}>{fruit}</li>)}</ul>
-      </div>
-    </>
+    <div className="space-y-6">
+      {posts?.map((post) => (
+        <Post key={post.id} post={post} />
+      ))}
+    </div>
   )
 }
-
-export default App
